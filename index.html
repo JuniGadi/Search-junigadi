@@ -508,8 +508,9 @@
     }
     
     .section-title {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 500;
+
       margin-bottom: 15px;
       color: var(--text-dark);
       display: flex;
@@ -835,7 +836,7 @@ transform: translateY(-5px);
 .locations-slider-container {
   overflow-x: hidden;
   position: relative;
-  padding: 0 15px;
+  /* padding: 0 15px; */
 }
 
 .locations-slider {
@@ -847,9 +848,9 @@ transform: translateY(-5px);
 .location-row {
   display: flex;
   width: 50%; /* Each slide takes 50% of container */
-  padding: 15px 0;
+  /* padding: 15px 0; */
   gap: 20px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .location-card {
@@ -944,15 +945,15 @@ transform: translateY(-5px);
 .locations-slider-container {
   overflow-x: hidden;
   position: relative;
-  padding: 0 15px;
-  /* border: 1px solid black; */
+  /* padding: 0 15px; */
+  border: 1px solid black;
 }
 
 .locations-slider {
   display: flex;
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 200%; /* 2 slides */
-  /* border: 1px solid black; */
+  border: 1px solid black;
 
   /* overflow-x: scroll; */
 }
@@ -961,13 +962,14 @@ transform: translateY(-5px);
   width: 50%; /* Each slide takes 50% of container */
   display: flex;
   flex-direction: column;
-  padding: 15px 15px;
+  padding: 0px 15px;
   gap: 20px;
   
 }
 
 .location-row {
   display: flex;
+  justify-content: space-between;
   width: 100%; /* Full width of the slide */
   /* gap: 20px; */
   /* justify-content: space-between; */
@@ -1352,23 +1354,12 @@ transform: translateY(-5px);
     </h3>
     
     <!-- Navigation controls -->
-    <div class="slider-controls">
-      <button class="slider-nav prev">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <div class="slider-dots">
-        <span class="dot active" data-slide="0"></span>
-        <span class="dot" data-slide="1"></span>
-      </div>
-      <button class="slider-nav next">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-    </div>
+    
   </div>
 </div>
 
-  <div class="locations-slider-container card-body">
-    <div class="locations-slider ">
+  <div class="locations-slider-container">
+    <div class="locations-slider">
       <!-- Slide 1 -->
       <div class="slide">
         <div class="location-row">
@@ -1491,67 +1482,7 @@ const nextBtn = document.querySelector('.slider-nav.next');
 const dots = document.querySelectorAll('.dot');
 let currentSlide = 0;
 
-
-
-function goToSlide(slideIndex) {
-  currentSlide = slideIndex;
-  slider.style.transform = `translateX(-${currentSlide * 50}%)`;
-  
-  // Update dots
-  dots.forEach((dot, index) => {
-    dot.classList.toggle('active', index === currentSlide);
-  });
-}
-
-// Navigation controls
-prevBtn.addEventListener('click', () => {
-  if (currentSlide > 0) {
-    goToSlide(currentSlide - 1);
-  }
-});
-
-nextBtn.addEventListener('click', () => {
-  if (currentSlide < dots.length - 1) {
-    goToSlide(currentSlide + 1);
-  }
-});
-
-// Dot navigation
-dots.forEach(dot => {
-  dot.addEventListener('click', (e) => {
-    const slideIndex = parseInt(e.target.getAttribute('data-slide'));
-    goToSlide(slideIndex);
-  });
-});
-
-// Touch/swipe support
-let touchStartX = 0;
-let touchEndX = 0;
-
-sliderContainer.addEventListener('touchstart', e => {
-  touchStartX = e.changedTouches[0].screenX;
-});
-
-sliderContainer.addEventListener('touchend', e => {
-  touchEndX = e.changedTouches[0].screenX;
-  handleSwipe();
-});
-
-function handleSwipe() {
-  const diff = touchStartX - touchEndX;
-  
-  if (diff > 50) {
-    // Swipe left - next slide
-    if (currentSlide < dots.length - 1) {
-      goToSlide(currentSlide + 1);
-    }
-  } else if (diff < -50) {
-    // Swipe right - previous slide
-    if (currentSlide > 0) {
-      goToSlide(currentSlide - 1);
-    }
-  }
-}
+sliderContainer.style.overflowX = 'scroll'; // Hide horizontal scrollbar
 
 
 
