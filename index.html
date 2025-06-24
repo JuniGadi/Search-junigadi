@@ -847,6 +847,7 @@ transform: translateY(-5px);
 
 .location-row {
   display: flex;
+  justify-content: space-around;
   width: 50%; /* Each slide takes 50% of container */
   /* padding: 15px 0; */
   gap: 20px;
@@ -946,14 +947,15 @@ transform: translateY(-5px);
   overflow-x: hidden;
   position: relative;
   /* padding: 0 15px; */
-/*   border: 1px solid black; */
+  /* border: 1px solid black; */
+
 }
 
 .locations-slider {
   display: flex;
   transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 200%; /* 2 slides */
-/*   border: 1px solid black; */
+  /* border: 1px solid black; */
 
   /* overflow-x: scroll; */
 }
@@ -962,14 +964,15 @@ transform: translateY(-5px);
   width: 50%; /* Each slide takes 50% of container */
   display: flex;
   flex-direction: column;
-  padding: 0px 15px;
+  /* padding: 0px 15px; */
   gap: 20px;
   
 }
 
 .location-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  /* justify-content: space-between; */
   width: 100%; /* Full width of the slide */
   /* gap: 20px; */
   /* justify-content: space-between; */
@@ -1093,7 +1096,7 @@ transform: translateY(-5px);
     .location-card:hover {
       transform: none;
       box-shadow: none;
-      border-color: #eef2f6;
+      border-color: black;
     }
 
     .location-card.selected {
@@ -1508,6 +1511,18 @@ sliderContainer.style.overflowX = 'scroll'; // Hide horizontal scrollbar
     const locationInput = document.getElementById('locationInput');
     const suggestionsDropdown = document.getElementById('suggestionsDropdown');
     
+    locationCards.forEach(card => {
+    card.addEventListener('click', () => {
+      locationCards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedLocation = card.getAttribute('data-location');
+      
+      // NEW: Set input value to selected location
+      locationInput.value = selectedLocation;
+    });
+  });
+
+
     // State
     let currentStep = 1;
     let selectedVehicle = null;
@@ -1752,4 +1767,5 @@ sliderContainer.style.overflowX = 'scroll'; // Hide horizontal scrollbar
   </script>
 </body>
 </html>
+
 
